@@ -1,3 +1,5 @@
+const { checkToken } = require("../modules/jwt");
+
 module.exports = class PhotosController{
    
     static async GetPhotos(req, res){
@@ -25,18 +27,21 @@ module.exports = class PhotosController{
         try{
             const psql = await req.psql;
 
+           
+            let { url, description, photo_name, category, token } = req.body;
+
+            token = checkToken(token);
+            console.log(token)
             let user = await psql.users.findOne({
                 where:{
-                    id: req.user,
+                    id: token,
                 },
                 raw: true
             })
-            const { url, description, photo_name, category } = req.body;
-
-            if(!req.user) throw new Error("user not registered");
+            if(!user) throw new Error("user not registered");
 
             let photo = await psql.photos.create({
-                user_id: req.user,
+                user_id: token,
                 author: user.username,
                 url,
                 description,
