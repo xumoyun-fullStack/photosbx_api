@@ -15,7 +15,7 @@ router.post("/login", LoginPost);
 router.get("/verify/:id", VerifyMail);
 
 
-router.get("/photos", AuthMiddleware, GetPhotos)
+router.get("/photos",  GetPhotos)
 router.post("/photos/create",AuthMiddleware, AddPhoto)
 router.post("/photos/delete/:photo_id", AuthMiddleware, DeletePhoto);
 

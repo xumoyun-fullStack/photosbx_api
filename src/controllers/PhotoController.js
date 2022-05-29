@@ -3,8 +3,7 @@ const { checkToken } = require("../modules/jwt");
 module.exports = class PhotosController{
    
     static async GetPhotos(req, res){
-        try{
-            
+        try{            
             const psql = await req.psql;
             let photos = await psql.photos.findAll();
             let comments = await psql.comments.findAll();
@@ -14,6 +13,7 @@ module.exports = class PhotosController{
                 photos,
                 comments
             })
+
         }catch(e){
             console.log(e);
             res.status(400).json({
