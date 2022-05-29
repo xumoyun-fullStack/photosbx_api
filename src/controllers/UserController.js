@@ -106,7 +106,7 @@ module.exports = class UserController{
             if(!isTrue) throw new Error("Incorrect password");
             if(!user.isVerified) throw new Error("This user not verified!")
 
-            const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+            const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress || null;
             const useragent = req.headers['user-agent'];
 
             const session = await psql.sessions.create({
