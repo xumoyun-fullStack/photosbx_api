@@ -38,7 +38,7 @@ module.exports = class UserController{
                 email,
                 "Verification link",
                 null,
-                `<p><a href="http://localhost:${PORT}/verify/${user.id}">Click here</a> to activate your account</p>`
+                `<p><a href="https://photosapibx.onrender.com/verify/${user.id}">Click here</a> to activate your account</p>`
             )
 
             res.cookie("token", token);
